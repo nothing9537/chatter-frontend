@@ -3,7 +3,7 @@ import { createContext, FC, useContext, useEffect, useMemo, useState } from 'rea
 type Theme = 'dark' | 'light' | 'system';
 
 type ThemeProviderProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   defaultTheme?: Theme;
   storageKey?: string;
 }
