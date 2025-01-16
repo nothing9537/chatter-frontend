@@ -15,6 +15,5 @@ export const RequireAuth = ({ predicate, children }: RequireAuthProps) => {
     return <Navigate to={RoutesPath.getRouteSignIn()} state={{ from: location }} replace />;
   }
 
-  // eslint-disable-next-line react/jsx-no-useless-fragment
   return children;
 };

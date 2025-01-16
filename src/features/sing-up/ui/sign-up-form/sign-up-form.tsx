@@ -13,20 +13,20 @@ import { Form } from '@/shared/ui/form';
 import { Stack } from '@/shared/ui/stack';
 
 import { RoutesPath } from '@/shared/consts/router-consts';
-import { SignInFormSchemaType } from '../../model/types/validation-schema-types';
-import { SignInSchema } from '../../model/validation-schema/sing-in-form-schema';
+import { SignUpFormSchemaType } from '../../model/types/validation-schema-types';
+import { SignUpFormSchema } from '../../model/validation-schema/sign-up-form-schema';
 
 interface AuthFormProps {
   className?: string;
 }
 
-export const AuthForm: FC<AuthFormProps> = ({ className }) => {
-  const form = useForm<SignInFormSchemaType>({
-    resolver: zodResolver(SignInSchema),
+export const SignUpForm: FC<AuthFormProps> = ({ className }) => {
+  const form = useForm<SignUpFormSchemaType>({
+    resolver: zodResolver(SignUpFormSchema),
     defaultValues: { username: '', password: '' },
   });
 
-  const onSubmit = useCallback((values: SignInFormSchemaType) => {
+  const onSubmit = useCallback((values: SignUpFormSchemaType) => {
     console.log(values);
 
     return new Promise((resolve) => {
@@ -37,7 +37,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
   return (
     <Card className={cn('w-4/6 md:w-1/3', className)}>
       <CardHeader>
-        <CardTitle className="text-2xl">Login</CardTitle>
+        <CardTitle className="text-2xl">Sign Up</CardTitle>
         <CardDescription>
           Enter your login below to proceed to your account.
         </CardDescription>
@@ -64,14 +64,24 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
                 />
               )}
             </FormFieldWrapper>
+            <FormFieldWrapper form={form} name="confirmPassword" label="Confirmation Password">
+              {({ field, formState }) => (
+                <Input
+                  {...field}
+                  type="password"
+                  disabled={formState.isSubmitting}
+                  placeholder="Password"
+                />
+              )}
+            </FormFieldWrapper>
             <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-              <TextWithLoader text="Login" isLoading={form.formState.isSubmitting} />
+              <TextWithLoader text="Sign Up" isLoading={form.formState.isSubmitting} />
             </Button>
             <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?
+              Already have an account?
               {' '}
-              <Link to={RoutesPath.getRouteSignUp()} className="underline underline-offset-4">
-                Sign up
+              <Link to={RoutesPath.getRouteSignIn()} className="underline underline-offset-4">
+                Sign in
               </Link>
             </div>
           </Stack>

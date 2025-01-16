@@ -1,5 +1,5 @@
 import { z } from 'zod';
 
-import { AuthFormSchema } from '../validation-schema/auth-form-schema';
+import { SignInSchema } from '../validation-schema/sing-in-form-schema';
 
-export type AuthFormSchemaType = z.infer<typeof AuthFormSchema>;
+export type SignInFormSchemaType = z.infer<typeof SignInSchema>;
