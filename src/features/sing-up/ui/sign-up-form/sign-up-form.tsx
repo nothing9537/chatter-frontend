@@ -1,9 +1,8 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { useCreateUser } from '@/entities/user';
 import { FormFieldWrapper } from '@/shared/components/form-field-wrapper';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/shared/ui/card';
 import { TextWithLoader } from '@/shared/components/text-with-loader';
@@ -16,6 +15,7 @@ import { Stack } from '@/shared/ui/stack';
 
 import { SignUpFormSchemaType } from '../../model/types/validation-schema-types';
 import { SignUpFormSchema } from '../../model/validation-schema/sign-up-form-schema';
+import { useSignUp } from '../../lib/hooks/use-sign-up';
 
 interface AuthFormProps {
   className?: string;
@@ -27,11 +27,7 @@ export const SignUpForm: FC<AuthFormProps> = ({ className }) => {
     defaultValues: { email: '', password: '' },
   });
 
-  const [createUser] = useCreateUser();
-
-  const onSubmit = useCallback((values: SignUpFormSchemaType) => {
-    return createUser({ variables: { createUserInput: values } });
-  }, [createUser]);
+  const signUpCb = useSignUp();
 
   return (
     <Card className={cn('w-4/6 md:w-1/3', className)}>
@@ -43,7 +39,7 @@ export const SignUpForm: FC<AuthFormProps> = ({ className }) => {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <Stack direction="vertical" as="form" onSubmit={form.handleSubmit(onSubmit)}>
+          <Stack direction="vertical" as="form" onSubmit={form.handleSubmit(signUpCb)}>
             <FormFieldWrapper form={form} name="email" label="Email">
               {({ field, formState }) => (
                 <Input

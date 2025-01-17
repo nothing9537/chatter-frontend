@@ -1,9 +1,9 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { useCreateUser } from '@/entities/user';
+import { useLoginUser } from '@/entities/user';
 import { FormFieldWrapper } from '@/shared/components/form-field-wrapper';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/shared/ui/card';
 import { TextWithLoader } from '@/shared/components/text-with-loader';
@@ -27,11 +27,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
     defaultValues: { email: '', password: '' },
   });
 
-  // const [createUser] = useCreateUser();
-
-  // const onSubmit = useCallback((values: SignInFormSchemaType) => {
-  //   return createUser({ variables: values });
-  // }, [createUser]);
+  const loginCb = useLoginUser();
 
   return (
     <Card className={cn('w-4/6 md:w-1/3', className)}>
@@ -43,7 +39,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <Stack direction="vertical" as="form">
+          <Stack direction="vertical" as="form" onSubmit={form.handleSubmit(loginCb)}>
             <FormFieldWrapper form={form} name="email" label="Login">
               {({ field, formState }) => (
                 <Input
