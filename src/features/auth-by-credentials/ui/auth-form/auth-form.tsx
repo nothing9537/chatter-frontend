@@ -3,16 +3,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
+import { useCreateUser } from '@/entities/user';
 import { FormFieldWrapper } from '@/shared/components/form-field-wrapper';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/shared/ui/card';
 import { TextWithLoader } from '@/shared/components/text-with-loader';
+import { RoutesPath } from '@/shared/consts/router-consts';
 import { cn } from '@/shared/lib/utils/cn';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Form } from '@/shared/ui/form';
 import { Stack } from '@/shared/ui/stack';
 
-import { RoutesPath } from '@/shared/consts/router-consts';
 import { SignInFormSchemaType } from '../../model/types/validation-schema-types';
 import { SignInSchema } from '../../model/validation-schema/sing-in-form-schema';
 
@@ -23,16 +24,14 @@ interface AuthFormProps {
 export const AuthForm: FC<AuthFormProps> = ({ className }) => {
   const form = useForm<SignInFormSchemaType>({
     resolver: zodResolver(SignInSchema),
-    defaultValues: { username: '', password: '' },
+    defaultValues: { email: '', password: '' },
   });
 
-  const onSubmit = useCallback((values: SignInFormSchemaType) => {
-    console.log(values);
+  // const [createUser] = useCreateUser();
 
-    return new Promise((resolve) => {
-      setTimeout(resolve, 3000);
-    });
-  }, []);
+  // const onSubmit = useCallback((values: SignInFormSchemaType) => {
+  //   return createUser({ variables: values });
+  // }, [createUser]);
 
   return (
     <Card className={cn('w-4/6 md:w-1/3', className)}>
@@ -44,12 +43,12 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <Stack direction="vertical" as="form" onSubmit={form.handleSubmit(onSubmit)}>
-            <FormFieldWrapper form={form} name="username" label="Login">
+          <Stack direction="vertical" as="form">
+            <FormFieldWrapper form={form} name="email" label="Login">
               {({ field, formState }) => (
                 <Input
                   {...field}
-                  placeholder="john-doe"
+                  placeholder="example@mail.com"
                   disabled={formState.isSubmitting}
                 />
               )}

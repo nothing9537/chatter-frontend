@@ -5,7 +5,7 @@ import { PageWrapper } from '@/shared/components/page-wrapper';
 
 export const SignInPage: FC = () => {
   return (
-    <PageWrapper className="flex">
+    <PageWrapper className="flex flex">
       <AuthForm className="m-auto" />
     </PageWrapper>
   );
