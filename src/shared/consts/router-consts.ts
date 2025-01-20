@@ -1,6 +1,7 @@
 export enum AppRoutes {
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
+  HOME = '/'
 }
 
 export class RoutesPath {
@@ -10,5 +11,9 @@ export class RoutesPath {
 
   public static getRouteSignUp(): AppRoutes {
     return AppRoutes.SIGN_UP;
+  }
+
+  public static getRouteHome(): AppRoutes {
+    return AppRoutes.HOME;
   }
 }

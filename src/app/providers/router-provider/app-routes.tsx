@@ -1,22 +1,35 @@
-import { FC, ReactNode, Suspense, useMemo } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { FC, ReactNode, Suspense, useEffect, useMemo } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
+import { useGetCurrentUser } from '@/entities/user';
 import { Loader } from '@/shared/ui/loader';
+import { RoutesPath } from '@/shared/consts/router-consts';
 
 import { RequireAuth } from './require-auth';
 import RoutesConfig from './config/routes.config';
 
 export const AppRoutes: FC = () => {
+  const { data } = useGetCurrentUser();
+  const navigate = useNavigate();
+
+  const isAuthenticated = Boolean(data?.currentUser);
+
+  useEffect(() => {
+    if (data?.currentUser) {
+      navigate(RoutesPath.getRouteHome());
+    }
+  }, [data, navigate]);
+
   const routes = useMemo(() => RoutesConfig.collect().map(({ path, element, authOnly, ...rest }) => {
-    let content: ReactNode = authOnly ? (
+    let content: ReactNode = (
       <Suspense fallback={<Loader className="size-16" />}>
         {element}
       </Suspense>
-    ) : element;
+    );
 
     if (authOnly) {
       content = (
-        <RequireAuth predicate>
+        <RequireAuth predicate={isAuthenticated}>
           {element}
         </RequireAuth>
       );
@@ -30,7 +43,7 @@ export const AppRoutes: FC = () => {
         {...rest}
       />
     );
-  }), []);
+  }), [isAuthenticated]);
 
   return (
     <Routes>

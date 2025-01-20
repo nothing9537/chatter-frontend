@@ -1,3 +1,4 @@
+import { HomePage } from '@/pages/home';
 import { SignInPage } from '@/pages/sing-in';
 import { SignUpPage } from '@/pages/sing-up';
 import { AppRoutes, RoutesPath } from '@/shared/consts/router-consts';
@@ -13,6 +14,11 @@ const initialRoutesConfig: AppRouteProps[] = [
     path: RoutesPath.getRouteSignUp(),
     element: <SignUpPage />,
     authOnly: false,
+  },
+  {
+    path: RoutesPath.getRouteHome(),
+    element: <HomePage />,
+    authOnly: true,
   },
   // {
   //   path: '*',
