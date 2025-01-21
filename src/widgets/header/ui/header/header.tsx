@@ -2,7 +2,6 @@ import { FC } from 'react';
 
 import { useReactiveVar } from '@apollo/client';
 import { ThemeSwitcher } from '@/features/theme-switcher';
-import { UserButton } from '@/features/user-button';
 import { cn } from '@/shared/lib/utils/cn';
 import { Stack } from '@/shared/ui/stack';
 import { SidebarTrigger } from '@/shared/ui/sidebar';
@@ -21,16 +20,13 @@ export const Header: FC<HeaderProps> = ({ className }) => {
   return (
     <header className={cn('w-full flex items-center justify-between px-2 h-12 border-b', className)}>
       <Stack direction="horizontal" spacing={2}>
-        <SidebarTrigger />
+        {isAuthenticated && (
+          <SidebarTrigger />
+        )}
         <Separator className="h-8 w-[1px]" />
         <Branding />
       </Stack>
-      <Stack direction="horizontal" spacing={4} className="items-center">
-        <ThemeSwitcher />
-        {isAuthenticated && (
-          <UserButton />
-        )}
-      </Stack>
+      <ThemeSwitcher />
     </header>
   );
 };
