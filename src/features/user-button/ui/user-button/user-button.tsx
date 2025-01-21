@@ -14,11 +14,7 @@ export const UserButton: FC = () => {
   const { data } = useGetCurrentUser();
   const logoutHandler = useLogoutUser();
 
-  if (!data?.currentUser) {
-    return null;
-  }
-
-  const { email } = data.currentUser;
+  const { email } = data!.currentUser;
 
   return (
     <DropdownMenu>

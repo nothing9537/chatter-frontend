@@ -4,6 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useGetCurrentUser } from '@/entities/user';
 import { Loader } from '@/shared/ui/loader';
 import { RoutesPath } from '@/shared/consts/router-consts';
+import { authenticatedVar } from '@/shared/consts/authenticated';
 
 import { RequireAuth } from './require-auth';
 import RoutesConfig from './config/routes.config';
@@ -19,6 +20,12 @@ export const AppRoutes: FC = () => {
       navigate(RoutesPath.getRouteHome());
     }
   }, [data, navigate]);
+
+  useEffect(() => {
+    if (data?.currentUser) {
+      authenticatedVar(true);
+    }
+  }, [data]);
 
   const routes = useMemo(() => RoutesConfig.collect().map(({ path, element, authOnly, ...rest }) => {
     let content: ReactNode = (
