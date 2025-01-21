@@ -68,9 +68,6 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
               <Link to={RoutesPath.getRouteSignUp()} className="underline underline-offset-4">
                 Sign up
               </Link>
-              <Link to={RoutesPath.getRouteHome()} className="underline underline-offset-4">
-                foo
-              </Link>
             </div>
           </Stack>
         </Form>
