@@ -1,35 +1,28 @@
-import { FC, ReactNode, Suspense, useEffect, useMemo } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { FC, ReactNode, Suspense, useMemo } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import { useGetCurrentUser } from '@/entities/user';
+import { useReactiveVar } from '@apollo/client';
 import { Loader } from '@/shared/ui/loader';
-import { RoutesPath } from '@/shared/consts/router-consts';
 import { authenticatedVar } from '@/shared/consts/authenticated';
 
+import { PageWrapper } from '@/shared/components/page-wrapper';
 import { RequireAuth } from './require-auth';
 import RoutesConfig from './config/routes.config';
 
+const PageFallback = () => {
+  return (
+    <PageWrapper className="flex">
+      <Loader className="size-16 m-auto" />
+    </PageWrapper>
+  );
+};
+
 export const AppRoutes: FC = () => {
-  const { data } = useGetCurrentUser();
-  const navigate = useNavigate();
-
-  const isAuthenticated = Boolean(data?.currentUser);
-
-  useEffect(() => {
-    if (data?.currentUser) {
-      navigate(RoutesPath.getRouteHome());
-    }
-  }, [data, navigate]);
-
-  useEffect(() => {
-    if (data?.currentUser) {
-      authenticatedVar(true);
-    }
-  }, [data]);
+  const isAuthenticated = useReactiveVar(authenticatedVar);
 
   const routes = useMemo(() => RoutesConfig.collect().map(({ path, element, authOnly, ...rest }) => {
     let content: ReactNode = (
-      <Suspense fallback={<Loader className="size-16" />}>
+      <Suspense fallback={<PageFallback />}>
         {element}
       </Suspense>
     );

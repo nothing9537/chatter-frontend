@@ -1,6 +1,8 @@
 import { HomePage } from '@/pages/home';
+import { NotFoundPage } from '@/pages/not-found';
 import { SignInPage } from '@/pages/sing-in';
 import { SignUpPage } from '@/pages/sing-up';
+
 import { AppRoutes, RoutesPath } from '@/shared/consts/router-consts';
 import { AppRouteProps } from '@/shared/types/router-types';
 
@@ -20,10 +22,10 @@ const initialRoutesConfig: AppRouteProps[] = [
     element: <HomePage />,
     authOnly: true,
   },
-  // {
-  //   path: '*',
-  //   element: <NotFoundPage />,
-  // },
+  {
+    path: '*',
+    element: <NotFoundPage />,
+  },
 ];
 
 export class RoutesConfig {
