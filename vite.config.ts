@@ -19,6 +19,9 @@ export default defineConfig({
       '/auth/login': {
         target: baseAPI,
       },
+      '/auth/logout': {
+        target: baseAPI,
+      },
     },
   },
 });

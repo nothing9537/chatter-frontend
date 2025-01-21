@@ -8,8 +8,6 @@ const logoutLink = onError((error) => {
   if (error.graphQLErrors?.length && (error.graphQLErrors[0]?.extensions?.originalError as any)?.statusCode === 401) {
     if (RoutesConfig.collect().filter(({ authOnly }) => Boolean(authOnly)).find((route) => route.path?.includes(window.location.pathname))) {
       window.location.pathname = RoutesPath.getRouteSignIn();
-      // eslint-disable-next-line no-use-before-define
-      apolloClient.resetStore();
     }
   }
 });
