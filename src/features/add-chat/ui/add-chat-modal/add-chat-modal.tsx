@@ -21,11 +21,7 @@ export const AddChatModal: FC = () => {
             In this form, you can join an existing public chat room, or create a private chat room between you and another user.
           </DialogDescription>
         </DialogHeader>
-        <AddChatForm
-          onSubmit={async (values) => {
-            console.log(values);
-          }}
-        />
+        <AddChatForm />
       </DialogContent>
     </Dialog>
   );

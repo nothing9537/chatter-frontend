@@ -1,15 +1,15 @@
-import { gql, useQuery } from '@apollo/client';
-import { User } from '../model/types/user-types';
+import { useQuery } from '@apollo/client';
+import { graphql } from '@/shared/generated/graphql';
 
-const CURRENT_USER_QUERY = gql`
+const CURRENT_USER_DOCUMENT = graphql(`
   query CurrentUser {
     currentUser {
       _id
       email
     }
   }
-`;
+`);
 
 export const useGetCurrentUser = () => {
-  return useQuery<{ currentUser: User }>(CURRENT_USER_QUERY);
+  return useQuery(CURRENT_USER_DOCUMENT);
 };
