@@ -17,6 +17,7 @@ const documents = {
     "\n  mutation CreateChatInput($createChatInput: CreateChatInput!) {\n    createChat(createChatInput: $createChatInput) {\n      ...ChatFragment\n    }\n  }  \n": types.CreateChatInputDocument,
     "\n  query Chat($_id: String!) {\n    chat(_id: $_id) {\n      ...ChatFragment\n    }\n  } \n": types.ChatDocument,
     "\n  query Chats {\n    chats {\n      ...ChatFragment\n    }\n  }\n": types.ChatsDocument,
+    "\n  mutation CreateMessage($createMessageInput: CreateMessageInput!) {\n    createMessage(createMessageInput: $createMessageInput) {\n      _id\n      content\n      createdAt\n    }\n  }\n": types.CreateMessageDocument,
     "\n  mutation CreateUser($createUserInput: CreateUserInput!) {\n    createUser(createUserInput: $createUserInput) {\n      _id\n      email\n    }\n  }\n": types.CreateUserDocument,
     "\n  query CurrentUser {\n    currentUser {\n      _id\n      email\n    }\n  }\n": types.CurrentUserDocument,
     "\n  fragment ChatFragment on Chat {\n    _id\n    name\n    isPrivate\n    userIds\n    userId\n  }\n": types.ChatFragmentFragmentDoc,
@@ -48,6 +49,10 @@ export function graphql(source: "\n  query Chat($_id: String!) {\n    chat(_id: 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query Chats {\n    chats {\n      ...ChatFragment\n    }\n  }\n"): (typeof documents)["\n  query Chats {\n    chats {\n      ...ChatFragment\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation CreateMessage($createMessageInput: CreateMessageInput!) {\n    createMessage(createMessageInput: $createMessageInput) {\n      _id\n      content\n      createdAt\n    }\n  }\n"): (typeof documents)["\n  mutation CreateMessage($createMessageInput: CreateMessageInput!) {\n    createMessage(createMessageInput: $createMessageInput) {\n      _id\n      content\n      createdAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

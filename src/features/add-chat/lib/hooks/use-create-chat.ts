@@ -17,7 +17,7 @@ export const useCreateChat = () => {
       const errorMessage = extractErrorMessage(error);
 
       toast({
-        title: 'User Action',
+        title: 'Chat Action',
         className: 'capitalize',
         description: errorMessage || 'Unexpected error occurred.',
       });

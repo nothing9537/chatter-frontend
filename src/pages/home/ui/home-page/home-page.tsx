@@ -29,7 +29,9 @@ const HomePage: FC = () => {
         <div className="flex-1">
           Messages
         </div>
-        <SendMessageForm />
+        <SendMessageForm
+          chatId={_id!}
+        />
       </div>
     </HomePageLayout>
   );

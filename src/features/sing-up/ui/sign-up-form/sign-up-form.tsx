@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { FormFieldWrapper } from '@/shared/components/form-field-wrapper';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/shared/ui/card';
-import { TextWithLoader } from '@/shared/components/text-with-loader';
+import { ContentWithLoader } from '@/shared/components/content-with-loader';
 import { RoutesPath } from '@/shared/consts/router-consts';
 import { cn } from '@/shared/lib/utils/cn';
 import { Button } from '@/shared/ui/button';
@@ -70,7 +70,7 @@ export const SignUpForm: FC<AuthFormProps> = ({ className }) => {
               )}
             </FormFieldWrapper> */}
             <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-              <TextWithLoader text="Sign Up" isLoading={form.formState.isSubmitting} />
+              <ContentWithLoader content="Sign Up" isLoading={form.formState.isSubmitting} />
             </Button>
             <div className="mt-4 text-center text-sm">
               Already have an account?
