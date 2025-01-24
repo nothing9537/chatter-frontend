@@ -1,4 +1,4 @@
-import { HomePage } from '@/pages/home';
+import { HomePage, SelectChatPage } from '@/pages/home';
 import { NotFoundPage } from '@/pages/not-found';
 import { SignInPage } from '@/pages/sing-in';
 import { SignUpPage } from '@/pages/sing-up';
@@ -19,6 +19,11 @@ const initialRoutesConfig: AppRouteProps[] = [
   },
   {
     path: RoutesPath.getRouteHome(),
+    element: <SelectChatPage />,
+    authOnly: true,
+  },
+  {
+    path: RoutesPath.getRouteHome(':_id'),
     element: <HomePage />,
     authOnly: true,
   },

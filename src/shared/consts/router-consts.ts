@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-class-members */
 export enum AppRoutes {
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
@@ -13,7 +14,15 @@ export class RoutesPath {
     return AppRoutes.SIGN_UP;
   }
 
-  public static getRouteHome(): AppRoutes {
+  public static getRouteHome(): AppRoutes;
+
+  public static getRouteHome(id: number | string): AppRoutes;
+
+  public static getRouteHome(id?: number | string): AppRoutes {
+    if (id !== undefined) {
+      return `${AppRoutes.HOME}${id}` as AppRoutes;
+    }
+
     return AppRoutes.HOME;
   }
 }

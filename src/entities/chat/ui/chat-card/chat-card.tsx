@@ -1,11 +1,17 @@
 import { FC } from 'react';
 
 import { Card } from '@/shared/ui/card';
+import { Chat } from '@/shared/generated/graphql';
 
-export const ChatCard: FC = () => {
+interface ChatCardProps {
+  item: Chat;
+}
+
+export const ChatCard: FC<ChatCardProps> = ({ item }) => {
   return (
-    <Card className="border-none">
-      caed
+    <Card className="border-none shadow-none">
+      {item?.name}
+      {item._id}
     </Card>
   );
 };

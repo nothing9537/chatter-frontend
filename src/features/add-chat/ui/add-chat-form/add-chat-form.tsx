@@ -23,7 +23,7 @@ export const AddChatForm: FC = () => {
 
   return (
     <Form {...form}>
-      <Stack as="form" onSubmit={form.handleSubmit(onSubmit)} direction="vertical" spacing={2}>
+      <Stack as="form" onSubmit={form.handleSubmit(onSubmit)} direction="vertical" spacing={4}>
         <FormFieldWrapper form={form} name="isPrivate" label="Private" classNames={{ formItem: 'flex items-center gap-2' }}>
           {({ field, formState }) => (
             <Switch
@@ -42,6 +42,7 @@ export const AddChatForm: FC = () => {
               value={field.value as never}
               checked={field.value as never}
               disabled={formState.isSubmitting}
+              placeholder="Chat name, for ex. 'DeathCore music'"
             />
           )}
         </FormFieldWrapper>
