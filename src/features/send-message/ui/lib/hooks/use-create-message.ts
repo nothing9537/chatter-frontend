@@ -8,7 +8,7 @@ import { toast } from '@/shared/lib/hooks/use-toast';
 import { SendMessageSchemaType } from '../../model/types/validation-schema-types';
 
 export const useCreateMessage = (chatId: string, form: UseFormReturn<SendMessageSchemaType>) => {
-  const [createMessage] = useCreateMessageEntity();
+  const [createMessage] = useCreateMessageEntity(chatId);
 
   const cb = useCallback(async (values: SendMessageSchemaType) => {
     try {
@@ -18,7 +18,7 @@ export const useCreateMessage = (chatId: string, form: UseFormReturn<SendMessage
       const errorMessage = extractErrorMessage(error);
 
       toast({
-        title: 'Chat Action',
+        title: 'Message Action',
         className: 'capitalize',
         description: errorMessage || 'Unexpected error occurred.',
       });

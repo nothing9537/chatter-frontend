@@ -7,8 +7,8 @@ import { Form } from '@/shared/ui/form';
 import { Stack } from '@/shared/ui/stack';
 import { Switch } from '@/shared/ui/switch';
 import { Button } from '@/shared/ui/button';
-
 import { Input } from '@/shared/ui/input';
+
 import { AddChatSchemaType } from '../../model/types/validation-schema-types';
 import { AddChatSchema } from '../../model/validation-schema/add-chat-schema';
 import { useCreateChat } from '../../lib/hooks/use-create-chat';

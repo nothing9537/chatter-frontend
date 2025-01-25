@@ -43,7 +43,7 @@ export const Typography = <T extends TypographyVariant>({ children, variant, cla
       break;
     case 'p':
       typography = (
-        <p className={cn('leading-7 [&:not(:first-child)]:mt-6', className)}>
+        <p className={cn('leading-7', className)}>
           {children}
         </p>
       );

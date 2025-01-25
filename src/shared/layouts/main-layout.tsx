@@ -9,7 +9,7 @@ interface MainLayoutProps {
 
 export const MainLayout: FC<MainLayoutProps> = ({ sidebar, header, content }) => {
   return (
-    <SidebarProvider>
+    <SidebarProvider className="h-full">
       {sidebar}
       <SidebarInset>
         {header}

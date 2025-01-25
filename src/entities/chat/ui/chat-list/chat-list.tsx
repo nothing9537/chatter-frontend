@@ -33,7 +33,7 @@ export const ChatList: FC<ChatListProps> = memo((props) => {
 
   return (
     <Stack direction="vertical" className={props?.className}>
-      {data.map(renderChatCard(props))}
+      {data.map(renderChatCard(props)).reverse()}
     </Stack>
   );
 });
