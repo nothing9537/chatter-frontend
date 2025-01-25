@@ -30,6 +30,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "graphql": "^16.10.0",
+    "graphql-ws": "^6.0.2",
     "localforage": "^1.10.0",
     "lucide-react": "^0.471.1",
     "match-sorter": "^8.0.0",

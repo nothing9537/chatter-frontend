@@ -5,7 +5,6 @@ export function useScrollToBottom<T>(trigger: T) {
 
   useEffect(() => {
     if (scrollRef.current) {
-      console.log('scroll');
       scrollRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [trigger]);
