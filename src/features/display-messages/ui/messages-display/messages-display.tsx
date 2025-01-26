@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { MessageList, useGetMessages } from '@/entities/message';
+
+import { MessageList, useGetMessages, useMessageCreatedSubscription } from '@/entities/message';
 
 interface MessagesDisplayProps {
   chatId: string;
@@ -7,12 +8,13 @@ interface MessagesDisplayProps {
 }
 
 export const MessagesDisplay: FC<MessagesDisplayProps> = ({ chatId, className }) => {
-  const { data, loading } = useGetMessages({ chatId });
+  const { data, loading: isLoading } = useGetMessages({ chatId });
+  useMessageCreatedSubscription({ chatId });
 
   return (
     <MessageList
       data={data?.messages}
-      isLoading={loading}
+      isLoading={isLoading}
       className={className}
     />
   );

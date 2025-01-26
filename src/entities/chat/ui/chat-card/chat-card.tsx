@@ -11,7 +11,6 @@ export const ChatCard: FC<ChatCardProps> = ({ item }) => {
   return (
     <Card className="border-none shadow-none">
       {item?.name}
-      {item._id}
     </Card>
   );
 };

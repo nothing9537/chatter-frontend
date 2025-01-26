@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 
 import { graphql } from '@/shared/generated/graphql';
 
-import { GET_MESSAGE_DOCUMENTS } from './use-get-messages';
+import { updateMessagesCache } from '../helpers/cache/update-messages-cache';
 
 const CREATE_MESSAGE_DOCUMENT = graphql(`
   mutation CreateMessage($createMessageInput: CreateMessageInput!) {
@@ -12,28 +12,12 @@ const CREATE_MESSAGE_DOCUMENT = graphql(`
   }
 `);
 
-export const useCreateMessage = (chatId: string) => {
+export const useCreateMessage = () => {
   return useMutation(CREATE_MESSAGE_DOCUMENT, {
     update: (cache, { data }) => {
-      const messagesQueryOptions = {
-        query: GET_MESSAGE_DOCUMENTS,
-        variables: {
-          chatId,
-        },
-      };
-
-      const messages = cache.readQuery({ ...messagesQueryOptions });
-
-      if (!messages || !data?.createMessage) {
-        return;
+      if (data?.createMessage) {
+        updateMessagesCache(cache, data.createMessage);
       }
-
-      cache.writeQuery({
-        ...messagesQueryOptions,
-        data: {
-          messages: messages.messages.concat(data?.createMessage),
-        },
-      });
     },
   });
 };
