@@ -13,13 +13,14 @@ interface ChatListProps {
   isLoading: boolean;
   navigateRouteBasename: (id: string) => AppRoutes;
   className?: string;
+  isItemSelected: boolean | ((chatItem: Chat) => boolean);
 }
 
 const renderChatCard = (props: ChatListProps) => (item: Chat) => {
   return (
     // eslint-disable-next-line react/destructuring-assignment
     <Link key={item._id} to={props.navigateRouteBasename(item._id)}>
-      <ChatCard item={item} />
+      <ChatCard item={item} isSelected={props.isItemSelected} />
     </Link>
   );
 };

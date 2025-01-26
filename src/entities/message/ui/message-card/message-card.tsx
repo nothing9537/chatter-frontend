@@ -13,14 +13,12 @@ export const MessageCard: FC<MessageCardProps> = ({ item }) => {
   return (
     <Card className="flex items-start gap-4 p-4">
       <Avatar>
-        <AvatarFallback>{item.userId.charAt(0).toUpperCase()}</AvatarFallback>
+        <AvatarFallback>{item.user.username.charAt(0).toUpperCase()}</AvatarFallback>
       </Avatar>
       <div>
         <CardHeader className="p-0">
           <CardTitle className="text-sm font-semibold">
-            User
-            {' '}
-            {item.userId}
+            {item.user.username}
           </CardTitle>
           <p className="text-xs text-muted-foreground">
             {formatDistanceToNow(new Date(item.createdAt), { addSuffix: true })}

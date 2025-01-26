@@ -49,6 +49,15 @@ export const SignUpForm: FC<AuthFormProps> = ({ className }) => {
                 />
               )}
             </FormFieldWrapper>
+            <FormFieldWrapper form={form} name="username" label="Username">
+              {({ field, formState }) => (
+                <Input
+                  {...field}
+                  disabled={formState.isSubmitting}
+                  placeholder="Your preferred username"
+                />
+              )}
+            </FormFieldWrapper>
             <FormFieldWrapper form={form} name="password" label="Password">
               {({ field, formState }) => (
                 <Input
@@ -59,16 +68,6 @@ export const SignUpForm: FC<AuthFormProps> = ({ className }) => {
                 />
               )}
             </FormFieldWrapper>
-            {/* <FormFieldWrapper form={form} name="confirmPassword" label="Confirmation Password">
-              {({ field, formState }) => (
-                <Input
-                  {...field}
-                  type="password"
-                  disabled={formState.isSubmitting}
-                  placeholder="Password"
-                />
-              )}
-            </FormFieldWrapper> */}
             <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
               <ContentWithLoader content="Sign Up" isLoading={form.formState.isSubmitting} />
             </Button>

@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormFieldWrapper } from '@/shared/components/form-field-wrapper';
 import { Form } from '@/shared/ui/form';
 import { Stack } from '@/shared/ui/stack';
-import { Switch } from '@/shared/ui/switch';
+// import { Switch } from '@/shared/ui/switch';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 
@@ -16,7 +16,7 @@ import { useCreateChat } from '../../lib/hooks/use-create-chat';
 export const AddChatForm: FC = () => {
   const form = useForm<AddChatSchemaType>({
     resolver: zodResolver(AddChatSchema),
-    defaultValues: { isPrivate: false, userIds: [] },
+    defaultValues: { name: '' },
   });
 
   const onSubmit = useCreateChat();
@@ -24,7 +24,7 @@ export const AddChatForm: FC = () => {
   return (
     <Form {...form}>
       <Stack as="form" onSubmit={form.handleSubmit(onSubmit)} direction="vertical" spacing={4}>
-        <FormFieldWrapper form={form} name="isPrivate" label="Private" classNames={{ formItem: 'flex items-center gap-2' }}>
+        {/* <FormFieldWrapper form={form} name="isPrivate" label="Private" classNames={{ formItem: 'flex items-center gap-2' }}>
           {({ field, formState }) => (
             <Switch
               {...field}
@@ -34,7 +34,7 @@ export const AddChatForm: FC = () => {
               onCheckedChange={field.onChange}
             />
           )}
-        </FormFieldWrapper>
+        </FormFieldWrapper> */}
         <FormFieldWrapper form={form} name="name" label="Name">
           {({ field, formState }) => (
             <Input

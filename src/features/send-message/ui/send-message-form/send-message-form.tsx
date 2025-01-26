@@ -62,6 +62,9 @@ export const SendMessageForm: FC<SendMessageFormProps> = memo(({ className, chat
           <Typography variant="p" className="text-muted-foreground text-xs mt-0">
             Shift + Return to add a new line
           </Typography>
+          <Typography variant="p" className="text-muted-foreground text-xs mt-0">
+            Escape to fast leave from chat
+          </Typography>
         </Stack>
         <Separator className="h-9 w-[1px]" />
         <Button size="icon" className="shrink-0" type="submit" ref={buttonRef}>
