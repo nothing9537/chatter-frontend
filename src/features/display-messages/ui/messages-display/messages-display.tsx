@@ -4,12 +4,13 @@ import { MessageList, useGetMessages, useMessageCreatedSubscription } from '@/en
 
 interface MessagesDisplayProps {
   chatId: string;
+  trackableChatIds: string[];
   className?: string;
 }
 
-export const MessagesDisplay: FC<MessagesDisplayProps> = ({ chatId, className }) => {
+export const MessagesDisplay: FC<MessagesDisplayProps> = ({ chatId, className, trackableChatIds }) => {
   const { data, loading: isLoading } = useGetMessages({ chatId });
-  useMessageCreatedSubscription({ chatId });
+  useMessageCreatedSubscription({ chatIds: trackableChatIds });
 
   return (
     <MessageList

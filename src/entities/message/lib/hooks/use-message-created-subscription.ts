@@ -5,8 +5,8 @@ import { graphql, Message, SubscriptionMessageCreatedArgs } from '@/shared/gener
 import { updateLatestMessageCache, updateMessagesCache } from '../helpers/cache/update-messages-cache';
 
 const MESSAGE_CREATED_DOCUMENT = graphql(`
-  subscription messageCreated($chatId: String!) {
-    messageCreated(chatId: $chatId) {
+  subscription messageCreated($chatIds: [String!]!) {
+    messageCreated(chatIds: $chatIds) {
       ...MessageFragment
     }
   }
