@@ -1,4 +1,5 @@
 import { ChevronsUpDown, LogOut, Settings } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 import { FC } from 'react';
 import {
@@ -17,10 +18,12 @@ import {
 } from '@/shared/ui/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/shared/ui/sidebar';
 import { useGetCurrentUser, useLogoutUser } from '@/entities/user';
+import { RoutesPath } from '@/shared/consts/router-consts';
 
 export const UserButton: FC = () => {
   const { isMobile } = useSidebar();
   const { data } = useGetCurrentUser();
+  const navigate = useNavigate();
   const logoutHandler = useLogoutUser();
 
   const { email } = data!.currentUser;
@@ -64,7 +67,7 @@ export const UserButton: FC = () => {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate(RoutesPath.getRouteSettings())}>
                 <Settings />
                 Settings
               </DropdownMenuItem>

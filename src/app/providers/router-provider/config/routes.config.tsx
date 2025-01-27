@@ -2,6 +2,7 @@ import { HomePage, SelectChatPage } from '@/pages/home';
 import { NotFoundPage } from '@/pages/not-found';
 import { SignInPage } from '@/pages/sing-in';
 import { SignUpPage } from '@/pages/sing-up';
+import { UserSettingsPage } from '@/pages/user-settings';
 
 import { AppRoutes, RoutesPath } from '@/shared/consts/router-consts';
 import { AppRouteProps } from '@/shared/types/router-types';
@@ -25,6 +26,11 @@ const initialRoutesConfig: AppRouteProps[] = [
   {
     path: RoutesPath.getRouteHome(':_id'),
     element: <HomePage />,
+    authOnly: true,
+  },
+  {
+    path: RoutesPath.getRouteSettings(),
+    element: <UserSettingsPage />,
     authOnly: true,
   },
   {

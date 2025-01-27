@@ -1,26 +1,28 @@
 /* eslint-disable react/destructuring-assignment */
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useReactiveVar } from '@apollo/client';
 
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail } from '@/shared/ui/sidebar';
 import { authenticatedVar } from '@/shared/consts/authenticated';
-
 import { UserButton } from '@/features/user-button';
+
 import { SidebarItem } from '../../model/types/sidebar-item';
 import { SidebarItems } from '../../lib/consts/sidebar-items';
 
 const renderSidebarItem = (location: string) => (item: SidebarItem) => {
   return (
-    <SidebarMenuItem key={item.title}>
-      <SidebarMenuButton
-        tooltip={{ hidden: false, children: item.title }}
-        isActive={location.includes(item.path)}
-        className="px-2.5 md:px-2"
-      >
-        <item.icon />
-        <span>{item.title}</span>
-      </SidebarMenuButton>
-    </SidebarMenuItem>
+    <Link to={item.path} key={item.path}>
+      <SidebarMenuItem>
+        <SidebarMenuButton
+          tooltip={{ hidden: false, children: item.title }}
+          isActive={location.includes(item.path)}
+          className="px-2.5 md:px-2"
+        >
+          <item.icon />
+          <span>{item.title}</span>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    </Link>
   );
 };
 

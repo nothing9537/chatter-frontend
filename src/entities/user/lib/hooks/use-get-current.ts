@@ -5,6 +5,7 @@ const CURRENT_USER_DOCUMENT = graphql(`
   query CurrentUser {
     currentUser {
       _id
+      username
       email
     }
   }
