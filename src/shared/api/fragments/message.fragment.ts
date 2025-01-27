@@ -1,4 +1,4 @@
-import { graphql } from '../generated/graphql';
+import { graphql } from '@/shared/generated/graphql';
 
 export const MessageFragment = graphql(`
   fragment MessageFragment on Message {
@@ -7,9 +7,7 @@ export const MessageFragment = graphql(`
     createdAt
     chatId
     user {
-      _id
-      email
-      username
+      ...UserFragment
     }
   }
 `);

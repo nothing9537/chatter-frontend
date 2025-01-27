@@ -5,7 +5,7 @@ import { FC } from 'react';
 import {
   Avatar,
   AvatarFallback,
-  // AvatarImage,
+  AvatarImage,
 } from '@/shared/ui/avatar';
 import {
   DropdownMenu,
@@ -26,7 +26,7 @@ export const UserButton: FC = () => {
   const navigate = useNavigate();
   const logoutHandler = useLogoutUser();
 
-  const { email } = data!.currentUser;
+  const { email, imageUrl, username } = data!.currentUser;
   const emailFallback = email.charAt(0) + email.charAt(1);
 
   return (
@@ -39,11 +39,12 @@ export const UserButton: FC = () => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
+                <AvatarImage src={imageUrl} alt={username} />
                 <AvatarFallback className="rounded-lg">{emailFallback}</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate text-xs">{email}</span>
+                <span className="truncate font-semibold">{email}</span>
+                <span className="truncate text-xs">{username}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -57,11 +58,12 @@ export const UserButton: FC = () => {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
+                  <AvatarImage src={imageUrl} alt={username} />
                   <AvatarFallback className="rounded-lg">{emailFallback}</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate text-xs">{email}</span>
+                  <span className="truncate font-semibold">{email}</span>
+                  <span className="truncate text-xs">{username}</span>
                 </div>
               </div>
             </DropdownMenuLabel>

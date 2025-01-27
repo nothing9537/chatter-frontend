@@ -4,7 +4,7 @@ import { Upload } from 'lucide-react';
 import { Stack } from '@/shared/ui/stack';
 import { User } from '@/shared/generated/graphql';
 import { Typography } from '@/shared/ui/typography';
-import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Button } from '@/shared/ui/button';
 
 import { useUploadImage } from '../lib/hooks/use-upload-image';
@@ -22,6 +22,7 @@ export const UserSettings: FC<UserSettingsProps> = ({ user }) => {
         {user.username}
       </Typography>
       <Avatar className="size-64">
+        <AvatarImage src={user.imageUrl} />
         <AvatarFallback className="text-8xl">
           {user.username.charAt(0).toUpperCase()}
         </AvatarFallback>

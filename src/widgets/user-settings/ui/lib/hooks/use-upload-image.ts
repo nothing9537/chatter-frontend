@@ -4,6 +4,8 @@ import { AxiosError } from 'axios';
 import { $API } from '@/shared/api/axios';
 import { toast } from '@/shared/lib/hooks/use-toast';
 import { HttpError } from '@/shared/api/api-error';
+import { apolloClient } from '@/shared/api/apollo-client';
+import { CURRENT_USER_DOCUMENT } from '@/entities/user';
 
 export const useUploadImage = () => {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -29,6 +31,8 @@ export const useUploadImage = () => {
         title: 'User Action',
         description: 'Image uploaded successfully.',
       });
+
+      await apolloClient.refetchQueries({ include: [CURRENT_USER_DOCUMENT] });
     } catch (unknownError) {
       const error = unknownError as AxiosError<HttpError>;
 

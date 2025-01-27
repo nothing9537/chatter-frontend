@@ -1,4 +1,4 @@
-import { graphql } from '../generated/graphql';
+import { graphql } from '@/shared/generated/graphql';
 
 export const ChatFragment = graphql(`
   fragment ChatFragment on Chat {

@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 
 import { Message } from '@/shared/generated/graphql';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
-import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Hint } from '@/shared/ui/hint';
 import { Loader } from '@/shared/ui/loader';
 
@@ -20,6 +20,7 @@ const MessageCardBase: FC<MessageCardBaseProps> = ({ item, children }) => {
   return (
     <Card className="flex items-start gap-4 p-4">
       <Avatar>
+        <AvatarImage src={item.user.imageUrl} />
         <AvatarFallback>{item.user.username.charAt(0).toUpperCase()}</AvatarFallback>
       </Avatar>
       <div>

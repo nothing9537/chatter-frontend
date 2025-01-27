@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Card, CardDescription, CardTitle } from '@/shared/ui/card';
 import { Chat } from '@/shared/generated/graphql';
-import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Stack } from '@/shared/ui/stack';
 import { cn } from '@/shared/lib/utils/cn';
 
@@ -12,16 +12,19 @@ interface ChatCardProps {
 }
 
 export const ChatCard: FC<ChatCardProps> = ({ item, isSelected }) => {
-  let isCardSelected = isSelected;
+  let isCardSelected: boolean;
 
   if (typeof isSelected === 'function') {
     isCardSelected = isSelected(item);
+  } else {
+    isCardSelected = isSelected;
   }
 
   return (
     <Card className={cn('w-full border-none shadow-none break-all hover:bg-muted rounded-none p-2 transition-colors', isCardSelected && 'dark:bg-slate-900 bg-gray-200')}>
       <Stack className="space-x-2">
         <Avatar>
+          <AvatarImage src={item.latestMessage?.user.imageUrl} alt={item.latestMessage?.user.username} />
           <AvatarFallback>{item.name.charAt(0).toUpperCase()}</AvatarFallback>
         </Avatar>
         <Stack direction="vertical" spacing={1} className="truncate break-words break-all">
