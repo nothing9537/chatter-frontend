@@ -8,6 +8,7 @@ import RoutesConfig from '@/app/providers/router-provider/config/routes.config';
 
 import { onLogout } from '../lib/utils/apollo-client-utils';
 import { toast } from '../lib/hooks/use-toast';
+import { QueryChatsArgs } from '../generated/graphql';
 
 const wetherCurrentRouteIsProtectedRoute = RoutesConfig
   .collect()
@@ -55,6 +56,26 @@ const splitLink = split(
 );
 
 export const apolloClient = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          chats: {
+            keyArgs: false,
+            merge: (existing, incoming, { args }) => {
+              const merged = existing ? existing.slice(0) : [];
+              const typedArgs = args as QueryChatsArgs;
+
+              for (let i = 0; i < incoming.length; i += 1) {
+                merged[typedArgs.skip + i] = incoming[i];
+              }
+
+              return merged;
+            },
+          },
+        },
+      },
+    },
+  }),
   link: splitLink.concat(networkErrorLink).concat(logoutLink),
 });

@@ -1,14 +1,15 @@
 import { useQuery } from '@apollo/client';
-import { graphql } from '@/shared/generated/graphql';
+
+import { QueryChatsArgs, graphql } from '@/shared/generated/graphql';
 
 export const GET_CHAT_DOCUMENTS = graphql(`
-  query Chats {
-    chats {
+  query Chats($skip: Int!, $limit: Int!) {
+    chats(skip: $skip, limit: $limit) {
       ...ChatFragment
     }
   }
 `);
 
-export const useGetChats = () => {
-  return useQuery(GET_CHAT_DOCUMENTS);
+export const useGetChats = (variables: QueryChatsArgs) => {
+  return useQuery(GET_CHAT_DOCUMENTS, { variables });
 };

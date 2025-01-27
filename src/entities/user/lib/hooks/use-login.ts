@@ -1,7 +1,9 @@
 import { useCallback } from 'react';
+import { AxiosError } from 'axios';
 
 import { toast } from '@/shared/lib/hooks/use-toast';
 import { apolloClient } from '@/shared/api/apollo-client';
+import { $API } from '@/shared/api/axios';
 
 interface LoginUserPayload {
   email: string;
@@ -10,26 +12,18 @@ interface LoginUserPayload {
 
 export const useLoginUser = () => {
   const loginCb = useCallback(async (loginPayload: LoginUserPayload) => {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(loginPayload),
-    });
+    try {
+      await $API.post('/auth/login', loginPayload);
 
-    if (!res.ok) {
-      const errorMessage = res.status === 401 ? 'Credentials are not valid.' : 'Unknown error occurred.';
+      await apolloClient.refetchQueries({ include: 'active' });
+    } catch (unknownError) {
+      const error = unknownError as AxiosError<{ statusCode: number, error: string, message: string }>;
 
       toast({
         title: 'User Action',
-        description: errorMessage,
+        description: error.response?.data?.message || 'Unknown error occurred.',
       });
-
-      return;
     }
-
-    await apolloClient.refetchQueries({ include: 'active' });
   }, []);
 
   return loginCb;

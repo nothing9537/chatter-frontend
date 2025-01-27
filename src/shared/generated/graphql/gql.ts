@@ -16,7 +16,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n  mutation CreateChatInput($createChatInput: CreateChatInput!) {\n    createChat(createChatInput: $createChatInput) {\n      ...ChatFragment\n    }\n  }  \n": types.CreateChatInputDocument,
     "\n  query Chat($_id: String!) {\n    chat(_id: $_id) {\n      ...ChatFragment\n    }\n  } \n": types.ChatDocument,
-    "\n  query Chats {\n    chats {\n      ...ChatFragment\n    }\n  }\n": types.ChatsDocument,
+    "\n  query Chats($skip: Int!, $limit: Int!) {\n    chats(skip: $skip, limit: $limit) {\n      ...ChatFragment\n    }\n  }\n": types.ChatsDocument,
     "\n  mutation CreateMessage($createMessageInput: CreateMessageInput!) {\n    createMessage(createMessageInput: $createMessageInput) {\n      ...MessageFragment\n    }\n  }\n": types.CreateMessageDocument,
     "\n  query GetMessages($chatId: String!) {\n    messages(chatId: $chatId) {\n      ...MessageFragment\n    }\n  }\n": types.GetMessagesDocument,
     "\n  subscription messageCreated($chatIds: [String!]!) {\n    messageCreated(chatIds: $chatIds) {\n      ...MessageFragment\n    }\n  }\n": types.MessageCreatedDocument,
@@ -51,7 +51,7 @@ export function graphql(source: "\n  query Chat($_id: String!) {\n    chat(_id: 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query Chats {\n    chats {\n      ...ChatFragment\n    }\n  }\n"): (typeof documents)["\n  query Chats {\n    chats {\n      ...ChatFragment\n    }\n  }\n"];
+export function graphql(source: "\n  query Chats($skip: Int!, $limit: Int!) {\n    chats(skip: $skip, limit: $limit) {\n      ...ChatFragment\n    }\n  }\n"): (typeof documents)["\n  query Chats($skip: Int!, $limit: Int!) {\n    chats(skip: $skip, limit: $limit) {\n      ...ChatFragment\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
