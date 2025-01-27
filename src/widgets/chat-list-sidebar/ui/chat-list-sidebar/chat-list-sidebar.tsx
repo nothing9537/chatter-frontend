@@ -7,9 +7,10 @@ import { Stack } from '@/shared/ui/stack';
 import { RoutesPath } from '@/shared/consts/router-consts';
 import { InfiniteScroll } from '@/shared/components/infinite-scroll';
 import { useTotalDocumentsCount } from '@/shared/lib/hooks/use-total-document-count';
+import { PAGE_SIZE } from '@/shared/consts/pagination';
 
 export const ChatListSidebar: FC = () => {
-  const { data, loading, fetchMore } = useGetChats({ skip: 0, limit: 1 });
+  const { data, loading, fetchMore } = useGetChats({ skip: 0, limit: PAGE_SIZE });
   const { totalCount } = useTotalDocumentsCount('/chats/count');
   const params = useParams<{ _id: string }>();
 
@@ -18,7 +19,7 @@ export const ChatListSidebar: FC = () => {
       <AddChatButton />
       <InfiniteScroll
         isLoadingMore={loading}
-        loadMore={() => fetchMore({ variables: { skip: data?.chats.length || 0, limit: 10 } })}
+        loadMore={() => fetchMore({ variables: { skip: data?.chats.length || 0, limit: PAGE_SIZE } })}
         canLoadMore={data?.chats && totalCount ? data.chats.length < totalCount : false}
         triggerPosition="belowChild"
       >

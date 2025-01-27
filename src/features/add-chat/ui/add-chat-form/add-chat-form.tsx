@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormFieldWrapper } from '@/shared/components/form-field-wrapper';
 import { Form } from '@/shared/ui/form';
 import { Stack } from '@/shared/ui/stack';
-// import { Switch } from '@/shared/ui/switch';
+import { ContentWithLoader } from '@/shared/components/content-with-loader';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 
@@ -24,17 +24,6 @@ export const AddChatForm: FC = () => {
   return (
     <Form {...form}>
       <Stack as="form" onSubmit={form.handleSubmit(onSubmit)} direction="vertical" spacing={4}>
-        {/* <FormFieldWrapper form={form} name="isPrivate" label="Private" classNames={{ formItem: 'flex items-center gap-2' }}>
-          {({ field, formState }) => (
-            <Switch
-              {...field}
-              value={field.value as never}
-              checked={field.value as never}
-              disabled={formState.isSubmitting}
-              onCheckedChange={field.onChange}
-            />
-          )}
-        </FormFieldWrapper> */}
         <FormFieldWrapper form={form} name="name" label="Name">
           {({ field, formState }) => (
             <Input
@@ -46,8 +35,8 @@ export const AddChatForm: FC = () => {
             />
           )}
         </FormFieldWrapper>
-        <Button type="submit">
-          Save
+        <Button type="submit" disabled={form.formState.isSubmitting}>
+          <ContentWithLoader content="Save" isLoading={form.formState.isSubmitting} />
         </Button>
       </Stack>
     </Form>

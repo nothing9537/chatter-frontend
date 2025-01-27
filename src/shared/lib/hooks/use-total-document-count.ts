@@ -4,12 +4,14 @@ import { $API } from '@/shared/api/axios';
 
 import { toast } from './use-toast';
 
-export const useTotalDocumentsCount = (endpoint: string) => {
+export const useTotalDocumentsCount = (endpoint: string, params?: Record<string, string>) => {
   const [totalCount, setCount] = useState<number | undefined>();
 
   const countDocuments = useCallback(async () => {
     try {
-      const response = await $API.get<number>(endpoint);
+      const response = await $API.get<number>(endpoint, {
+        params,
+      });
 
       setCount(+response.data);
     } catch {
@@ -18,7 +20,7 @@ export const useTotalDocumentsCount = (endpoint: string) => {
         description: 'An error occurred while fetching the total count of documents',
       });
     }
-  }, [endpoint]);
+  }, [endpoint, params]);
 
   useEffect(() => {
     countDocuments();

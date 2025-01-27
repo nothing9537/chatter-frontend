@@ -2,6 +2,7 @@ import { ApolloCache } from '@apollo/client';
 
 import { Message } from '@/shared/generated/graphql';
 import { GET_CHAT_DOCUMENTS } from '@/entities/chat/lib/hooks/use-get-chats';
+import { PAGE_SIZE } from '@/shared/consts/pagination';
 
 import { GET_MESSAGE_DOCUMENTS } from '../../hooks/use-get-messages';
 
@@ -10,6 +11,8 @@ export const updateMessagesCache = (cache: ApolloCache<Message>, message: Messag
     query: GET_MESSAGE_DOCUMENTS,
     variables: {
       chatId: message.chatId,
+      skip: 0,
+      limit: PAGE_SIZE,
     },
   };
 

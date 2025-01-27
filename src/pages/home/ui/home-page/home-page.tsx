@@ -17,7 +17,7 @@ const HomePage: FC = () => {
   const params = useParams<{ _id: string }>();
   const _id = params._id!;
   const { data: currentChat, loading: isCurrentChatLoading } = useGetChat({ _id });
-  const { data: chats, loading: isChatsLoading } = useGetChats();
+  const { data: chats, loading: isChatsLoading } = useGetChats({ skip: 0, limit: 10 });
 
   if (!currentChat || !chats || isCurrentChatLoading || isChatsLoading) {
     return <Loader />;

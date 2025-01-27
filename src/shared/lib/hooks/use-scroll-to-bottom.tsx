@@ -1,15 +1,13 @@
 import { useEffect, useRef } from 'react';
 
-export function useScrollToBottom<T>(trigger: T) {
+export function useScrollToElement<T>(trigger: T, shouldScroll = true) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (scrollRef.current && shouldScroll) {
+      scrollRef.current.scrollIntoView({ behavior: 'instant' });
     }
-  }, [trigger]);
+  }, [trigger, shouldScroll]);
 
-  return (
-    <div className="h-1 w-1" ref={scrollRef} />
-  );
+  return { ref: scrollRef, element: <div className="h-1 w-1" ref={scrollRef} /> };
 }

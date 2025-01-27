@@ -2,8 +2,8 @@ import { useQuery } from '@apollo/client';
 import { GetMessagesQueryVariables, graphql } from '@/shared/generated/graphql';
 
 export const GET_MESSAGE_DOCUMENTS = graphql(`
-  query GetMessages($chatId: String!) {
-    messages(chatId: $chatId) {
+  query GetMessages($chatId: String!, $skip: Int!, $limit: Int!) {
+    messages(chatId: $chatId, skip: $skip, limit: $limit) {
       ...MessageFragment
     }
   }
