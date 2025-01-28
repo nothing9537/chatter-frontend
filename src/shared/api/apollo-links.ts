@@ -8,7 +8,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 
 import RoutesConfig from '@/app/providers/router-provider/config/routes.config';
 
-import { useUser } from '@/entities/user';
+import { useUser } from '@/entities/user/model/store/user-store';
 import { onLogout } from '../lib/utils/apollo-client-utils';
 import { toast } from '../lib/hooks/use-toast';
 

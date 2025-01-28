@@ -13,10 +13,10 @@ import { apolloClient } from '@/shared/api/apollo-client';
 
 import '@/app/styles/index.css';
 
-const AppTree = [BrowserRouter, ApolloProvider, StrictMode, ThemeProvider, ToasterProvider, ModalsProvider, App];
+const AppTree = [BrowserRouter, StrictMode, ThemeProvider, ToasterProvider, ApolloProvider, ModalsProvider, App];
 
 createRoot(
   document.getElementById('root')!,
 ).render(
-  BuildComponentsTree(AppTree, [{}, { client: apolloClient }]),
+  BuildComponentsTree(AppTree, [{}, {}, {}, {}, { client: apolloClient }]),
 );
