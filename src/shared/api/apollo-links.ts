@@ -47,7 +47,7 @@ export const wsLink = new GraphQLWsLink(
   createClient({
     url: `${import.meta.env.VITE_WS_URL}/graphql`,
     connectionParams: {
-      token: useUser.getState().authToken || AuthToken.getToken(),
+      token: `Bearer ${useUser.getState().authToken || AuthToken.getToken()}`,
     },
   }),
 );
