@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-import { logoutLink, networkErrorLink, splitLink } from './apollo-links';
+import { authLink, logoutLink, networkErrorLink, splitLink } from './apollo-links';
 import { mergeWithPagination } from './apollo-merge';
 
 export const apolloClient = new ApolloClient({
@@ -14,5 +14,5 @@ export const apolloClient = new ApolloClient({
       },
     },
   }),
-  link: splitLink.concat(networkErrorLink).concat(logoutLink),
+  link: splitLink.concat(networkErrorLink).concat(authLink).concat(logoutLink),
 });

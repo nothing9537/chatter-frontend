@@ -3,4 +3,6 @@ export { useLoginUser } from './lib/hooks/use-login';
 export { useGetCurrentUser } from './lib/hooks/use-get-current';
 export { useLogoutUser } from './lib/hooks/use-logout';
 
+export { useUser } from './model/store/user-store';
+
 export { CURRENT_USER_DOCUMENT } from './lib/hooks/use-get-current';

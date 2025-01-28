@@ -1,10 +1,14 @@
 import { onError } from '@apollo/client/link/error';
+import { createClient } from 'graphql-ws';
 
 import { HttpLink, split } from '@apollo/client';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
-import { createClient } from 'graphql-ws';
+import { setContext } from '@apollo/client/link/context';
 import { getMainDefinition } from '@apollo/client/utilities';
+
 import RoutesConfig from '@/app/providers/router-provider/config/routes.config';
+
+import { useUser } from '@/entities/user';
 import { onLogout } from '../lib/utils/apollo-client-utils';
 import { toast } from '../lib/hooks/use-toast';
 
@@ -40,7 +44,10 @@ export const httpLink = new HttpLink({ uri: `${import.meta.env.VITE_API_URL}/gra
 
 export const wsLink = new GraphQLWsLink(
   createClient({
-    url: `ws://${import.meta.env.VITE_WS_URL}/graphql`,
+    url: `${import.meta.env.VITE_WS_URL}/graphql`,
+    connectionParams: {
+      token: useUser.getState().authToken,
+    },
   }),
 );
 
@@ -53,3 +60,12 @@ export const splitLink = split(
   wsLink,
   httpLink,
 );
+
+export const authLink = setContext((_operation, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${useUser.getState().authToken}`,
+    },
+  };
+});

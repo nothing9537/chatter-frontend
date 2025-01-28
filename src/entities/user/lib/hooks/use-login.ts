@@ -5,6 +5,8 @@ import { toast } from '@/shared/lib/hooks/use-toast';
 import { apolloClient } from '@/shared/api/apollo-client';
 import { $API } from '@/shared/api/axios';
 
+import { useUser } from '../../model/store/user-store';
+
 interface LoginUserPayload {
   email: string;
   password: string;
@@ -13,7 +15,9 @@ interface LoginUserPayload {
 export const useLoginUser = () => {
   const loginCb = useCallback(async (loginPayload: LoginUserPayload) => {
     try {
-      await $API.post('/auth/login', loginPayload);
+      const response = await $API.post<string>('/auth/login', loginPayload);
+
+      useUser.getState().setAuthToken(response.data);
 
       await apolloClient.refetchQueries({ include: 'active' });
     } catch (unknownError) {
