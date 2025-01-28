@@ -14,5 +14,5 @@ export const apolloClient = new ApolloClient({
       },
     },
   }),
-  link: splitLink.concat(networkErrorLink).concat(authLink).concat(logoutLink),
+  link: authLink.concat(splitLink).concat(networkErrorLink).concat(logoutLink),
 });
