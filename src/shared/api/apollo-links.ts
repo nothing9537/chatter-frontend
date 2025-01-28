@@ -5,10 +5,10 @@ import { HttpLink, split } from '@apollo/client';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { setContext } from '@apollo/client/link/context';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { useUser } from '@/entities/user/model/store/user-store';
 
 import RoutesConfig from '@/app/providers/router-provider/config/routes.config';
 
-import { useUser } from '@/entities/user/model/store/user-store';
 import { onLogout } from '../lib/utils/apollo-client-utils';
 import { toast } from '../lib/hooks/use-toast';
 import { AuthToken } from '../lib/utils/auth-token-utils';
