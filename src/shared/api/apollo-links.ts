@@ -11,6 +11,7 @@ import RoutesConfig from '@/app/providers/router-provider/config/routes.config';
 import { useUser } from '@/entities/user/model/store/user-store';
 import { onLogout } from '../lib/utils/apollo-client-utils';
 import { toast } from '../lib/hooks/use-toast';
+import { AuthToken } from '../lib/utils/auth-token-utils';
 
 const wetherCurrentRouteIsProtectedRoute = RoutesConfig
   .collect()
@@ -46,7 +47,7 @@ export const wsLink = new GraphQLWsLink(
   createClient({
     url: `${import.meta.env.VITE_WS_URL}/graphql`,
     connectionParams: {
-      token: useUser.getState().authToken,
+      token: useUser.getState().authToken || AuthToken.getToken(),
     },
   }),
 );
@@ -62,10 +63,12 @@ export const splitLink = split(
 );
 
 export const authLink = setContext((_operation, { headers }) => {
+  const token = useUser.getState().authToken || AuthToken.getToken();
+
   return {
     headers: {
       ...headers,
-      Authorization: `Bearer ${useUser.getState().authToken}`,
+      Authorization: `Bearer ${token}`,
     },
   };
 });
