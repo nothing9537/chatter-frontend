@@ -53,8 +53,8 @@ export const MessageCard: FC<MessageCardProps> = ({ item }) => {
 
   return (
     <MessageCardBase item={item}>
-      <Hint label={`${format(item.createdAt, 'MMM d, yyyy')} at ${format(item.createdAt, 'hh:mm:ss a')}`}>
-        <p className="text-xs text-muted-foreground underline">
+      <Hint label={`${format(item.createdAt, 'MMM d, yyyy')} at ${format(item.createdAt, 'hh:mm:ss a')}`} className="w-fit">
+        <p className="text-xs text-muted-foreground underline w-fit">
           {formatDistanceToNow(new Date(item.createdAt), { addSuffix: true })}
         </p>
       </Hint>
