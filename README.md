@@ -68,7 +68,7 @@ The project follows **Feature Sliced Design** for scalable and maintainable code
 ```
 VITE_API_URL= in prod, MAIN AND PROXY are the same. In dev, this is main frontend URL, for vite its http://localhost:5173
 VITE_API_PROXY_URL= in prod, MAIN AND PROXY are the same. In dev, this is main backedn URL
-VITE_WS_URL= WS Backedn URL
+VITE_WS_URL= WS Backend URL
 ```
 
 ---
