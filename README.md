@@ -47,11 +47,11 @@ The project follows **Feature Sliced Design** for scalable and maintainable code
 ---
 
 ## Scripts
-- `npm run dev`: Start development server
-- `npm run build`: Create production build
-- `npm run lint`: Run ESLint checks
-- `npm run lint:fix`: Fix linting issues
-- `npm run codegen`: Generate GraphQL types
+- `pnpm run dev`: Start development server and auto-generate GraphQL types
+- `pnpm run build`: Create production build
+- `pnpm run lint`: Run ESLint checks
+- `pnpm run lint:fix`: Fix linting issues
+- `pnpm run codegen`: Generate GraphQL types
 
 ---
 
