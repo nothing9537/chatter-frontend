@@ -1,50 +1,77 @@
-# React + TypeScript + Vite
+# Real-Time Messenger
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting Started
 
-Currently, two official plugins are available:
+Install dependencies and run the project:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm i
+# or
+yarn
+# or
+pnpm i
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# Start the app
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## About
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+A real-time messaging application with channels, user authentication, and profile customization. Built to demonstrate fullstack development using modern tools like GraphQL, Apollo Client, and Feature Sliced Design.
+
+**Key Features**:
+- Real-time messaging via GraphQL Subscriptions
+- JWT authentication with HttpOnly cookies
+- Customizable user profiles (AWS S3 avatar upload)
+- Dark/light theme support
+- Channel creation and management
+
+---
+
+## Architecture
+
+The project follows **Feature Sliced Design** for scalable and maintainable code. Layers include:
+- `app`: Routing and global setup
+- `pages`: Page components
+- `widgets`: Complex UI blocks (e.g., chat interface)
+- `features`: Business logic (e.g., authentication, messaging)
+- `entities`: Core data models (users, channels, messages)
+- `shared`: Utilities, UI components, and configs
+
+---
+
+## Scripts
+- `npm run dev`: Start development server
+- `npm run build`: Create production build
+- `npm run lint`: Run ESLint checks
+- `npm run lint:fix`: Fix linting issues
+- `npm run codegen`: Generate GraphQL types
+
+---
+
+## Technology Stack
+- **Frontend**: React, TypeScript, Vite
+- **State Management**: Zustand
+- **Styling**: TailwindCSS, shadcn-ui
+- **GraphQL**: Apollo Client, GraphQL Codegen
+- **Architecture**: Feature Sliced Design
+
+---
+
+## ENV Structure
 ```
+VITE_API_URL= in prod, MAIN AND PROXY are the same. In dev, this is main frontend URL, for vite its http://localhost:5173
+VITE_API_PROXY_URL= in prod, MAIN AND PROXY are the same. In dev, this is main backedn URL
+VITE_WS_URL= WS Backedn URL
+```
+
+---
+
+## Disclaimer
+This project is for educational purposes only.
